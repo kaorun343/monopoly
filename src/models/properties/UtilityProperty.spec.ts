@@ -1,12 +1,12 @@
 import {
   Company,
-  initUtilityProperty,
+  UtilityProperty,
   calculateUtilityAmount,
 } from './UtilityProperty'
 
 describe('calculateUtilityAmount()', () => {
   it('should return `dice` * 4 if 1 property is owned', () => {
-    const properties = [initUtilityProperty(Company.ElectricCompany)]
+    const properties = [UtilityProperty(Company.ElectricCompany)]
 
     expect(calculateUtilityAmount(properties, 2)).toBe(4 * 2)
     expect(calculateUtilityAmount(properties, 11)).toBe(4 * 11)
@@ -14,8 +14,8 @@ describe('calculateUtilityAmount()', () => {
 
   it('should return `dice` * 4 if 2 properties are owned', () => {
     const properties = [
-      initUtilityProperty(Company.ElectricCompany),
-      initUtilityProperty(Company.WaterWorks),
+      UtilityProperty(Company.ElectricCompany),
+      UtilityProperty(Company.WaterWorks),
     ]
 
     expect(calculateUtilityAmount(properties, 2)).toBe(10 * 2)

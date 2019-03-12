@@ -5,11 +5,13 @@ export interface RailroadProperty {
   readonly type: PropertyType.Railroad
 }
 
-export function initRailroadProperty(title: string): RailroadProperty {
+export function RailroadProperty(title: string): RailroadProperty {
   return { title, type: PropertyType.Railroad }
 }
 
-export function calculateAmount(properties: ReadonlyArray<RailroadProperty>) {
+export function calculateRailroadAmount(
+  properties: ReadonlyArray<RailroadProperty>,
+) {
   const count = properties.length
   return 25 * 2 ** (count - 1)
 }

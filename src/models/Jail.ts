@@ -6,7 +6,7 @@ export type Jail<P = Player> = ReadonlyMap<P, number>
  * init a jail object
  * @param prisoners the prisoners to be imprisoned
  */
-export function initJail<P>(...prisoners: P[]): Jail<P> {
+export function Jail<P>(...prisoners: P[]): Jail<P> {
   return new Map(prisoners.map(prisoner => [prisoner, 0] as [P, number]))
 }
 

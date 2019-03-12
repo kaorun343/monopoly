@@ -10,7 +10,7 @@ export interface UtilityProperty {
   readonly company: Company
 }
 
-export function initUtilityProperty(company: Company): UtilityProperty {
+export function UtilityProperty(company: Company): UtilityProperty {
   return { company, type: PropertyType.Utility }
 }
 

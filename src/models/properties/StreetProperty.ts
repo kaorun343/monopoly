@@ -19,7 +19,7 @@ export interface StreetProperty {
   readonly rent: number
 }
 
-export function initStreetProperty(
+export function StreetProperty(
   color: StreetColor,
   rent: number,
 ): StreetProperty {
