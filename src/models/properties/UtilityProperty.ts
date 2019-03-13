@@ -5,7 +5,7 @@ export const enum Company {
   WaterWorks,
 }
 
-export interface UtilityProperty {
+export type UtilityProperty = {
   readonly type: PropertyType.Utility
   readonly company: Company
 }

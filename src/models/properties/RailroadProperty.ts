@@ -1,6 +1,6 @@
 import { PropertyType } from './PropertyType'
 
-export interface RailroadProperty {
+export type RailroadProperty = {
   readonly title: string
   readonly type: PropertyType.Railroad
 }

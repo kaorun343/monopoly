@@ -16,7 +16,7 @@ export const enum CardAction {
   RecieveFromPlayers,
 }
 
-export interface Card {
+export type Card = {
   text: string
   type: CardType
 }

@@ -1,5 +1,5 @@
 import { PropertyType } from './PropertyType'
 
-export interface CardProperty {
+export type CardProperty = {
   readonly type: PropertyType.Card
 }

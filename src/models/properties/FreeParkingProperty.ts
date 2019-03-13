@@ -1,5 +1,5 @@
 import { PropertyType } from './PropertyType'
 
-export interface FreeParkingProperty {
+export type FreeParkingProperty = {
   readonly type: PropertyType.FreeParking
 }

@@ -13,7 +13,7 @@ export const enum StreetColor {
 
 export type StreetColorInfo = ReadonlyMap<StreetColor, number>
 
-export interface StreetProperty {
+export type StreetProperty = {
   readonly type: PropertyType.Street
   readonly color: StreetColor
   readonly rent: number

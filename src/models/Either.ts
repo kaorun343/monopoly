@@ -3,12 +3,12 @@ export const enum EitherType {
   Right,
 }
 
-export interface Left<T> {
+export type Left<T> = {
   type: EitherType.Left
   reason: T
 }
 
-export interface Right<T> {
+export type Right<T> = {
   type: EitherType.Right
   value: T
 }

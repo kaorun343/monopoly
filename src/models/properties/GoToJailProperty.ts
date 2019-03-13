@@ -1,5 +1,5 @@
 import { PropertyType } from './PropertyType'
 
-export interface GoToJailProperty {
+export type GoToJailProperty = {
   readonly type: PropertyType.GoToJail
 }

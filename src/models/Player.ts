@@ -1,6 +1,6 @@
 import { Either, Right, Left } from './Either'
 
-export interface Player {
+export type Player = {
   readonly name: string
   readonly money: number
   readonly arrested: boolean

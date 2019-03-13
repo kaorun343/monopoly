@@ -1,6 +1,6 @@
 import { PropertyType } from './PropertyType'
 
-export interface TaxProperty {
+export type TaxProperty = {
   readonly type: PropertyType.Tax
   readonly money: number
 }
