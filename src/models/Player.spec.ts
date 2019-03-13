@@ -1,5 +1,5 @@
 import { Player, recieveMoney, payMoney } from './Player'
-import { Right, Left } from './Either'
+import { Right, Left } from './utils/Either'
 
 describe('recieveMoney()', () => {
   it('should update money property', () => {

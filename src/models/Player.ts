@@ -1,4 +1,4 @@
-import { Either, Right, Left } from './Either'
+import { Either, Right, Left } from './utils/Either'
 
 export type Player = {
   readonly name: string
