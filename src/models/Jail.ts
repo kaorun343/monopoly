@@ -1,6 +1,4 @@
-import { Player } from './Player'
-
-export type Jail<P = Player> = ReadonlyMap<P, number>
+export type Jail<P = Symbol> = ReadonlyMap<P, number>
 
 /**
  * init a jail object

@@ -1,6 +1,7 @@
 import { Either, Right, Left } from './utils/Either'
 
 export type Player = {
+  readonly symbol: symbol
   readonly name: string
   readonly money: number
   readonly bankrupt: boolean
@@ -8,7 +9,13 @@ export type Player = {
 }
 
 export function Player(name: string, money: number): Player {
-  return { name, money, bankrupt: false, arrested: false }
+  return {
+    symbol: Symbol(name),
+    name,
+    money,
+    bankrupt: false,
+    arrested: false,
+  }
 }
 
 export function recieveMoney(player: Player, money: number): Player {

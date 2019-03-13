@@ -2,23 +2,27 @@ import { Jail, imprisonPrisoner, releasePrisoner } from './Jail'
 
 describe('initJail()', () => {
   it('should init a Jail object', () => {
-    const jail = Jail(0, 1, 2, 3)
+    const jail = Jail(Symbol(), Symbol(), Symbol(), Symbol())
     expect(jail.size).toBe(4)
   })
 })
 
 describe('imprisonPrisoner()', () => {
   it('should imprison a prisoner', () => {
-    const jail = Jail(0)
-    expect(imprisonPrisoner(jail, 30).has(30)).toBeTruthy()
-    expect(jail.has(30)).toBeFalsy()
+    const jail = Jail(Symbol())
+
+    const symbol = Symbol()
+    expect(imprisonPrisoner(jail, symbol).has(symbol)).toBe(true)
+    expect(jail.has(symbol)).toBe(false)
   })
 })
 
 describe('releasePrisoner()', () => {
   it('should release a prisoner', () => {
-    const jail = Jail(0)
-    expect(releasePrisoner(jail, 0).has(0)).toBeFalsy()
-    expect(jail.has(0)).toBeTruthy()
+    const symbol = Symbol()
+    const jail = Jail(symbol)
+
+    expect(releasePrisoner(jail, symbol).has(symbol)).toBe(false)
+    expect(jail.has(symbol)).toBe(true)
   })
 })
