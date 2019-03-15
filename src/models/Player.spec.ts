@@ -10,19 +10,29 @@ function updateSymbol(p: Player): Player {
 describe('recieveMoney()', () => {
   it('should update money property', () => {
     expect(recieveMoney(player, 200).money).toBe(1700)
+  })
+
+  it('should not modify the original value', () => {
     expect(player.money).toBe(1500)
   })
 })
 
 describe('payMoney()', () => {
-  it('should return Right when the player can pay', () => {
-    expect(payMoney(player, 1200)).toEqual(Ok(updateSymbol(Player('', 300))))
-    expect(payMoney(player, 1500)).toEqual(Ok(updateSymbol(Player('', 0))))
-    expect(player.money).toBe(1500)
+  describe('when the player can play', () => {
+    it('should return Right', () => {
+      expect(payMoney(player, 1200)).toEqual(Ok(updateSymbol(Player('', 300))))
+      expect(payMoney(player, 1500)).toEqual(Ok(updateSymbol(Player('', 0))))
+    })
+
+    it('should not modify the original value', () => {
+      expect(player.money).toBe(1500)
+    })
   })
 
-  it('should return Left when the player cannot pay', () => {
-    expect(payMoney(player, 1501)).toEqual(Err(null))
+  describe('when the player cannot pay', () => {
+    it('should return Left', () => {
+      expect(payMoney(player, 1501)).toEqual(Err(null))
+    })
   })
 })
 
