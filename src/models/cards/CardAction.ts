@@ -1,8 +1,3 @@
-export const enum CardType {
-  Chance,
-  CommunityChest,
-}
-
 export const enum CardAction {
   MoveTo,
   MoveToStation,
@@ -14,9 +9,4 @@ export const enum CardAction {
   GetOutOfJail,
   GoToJail,
   RecieveFromPlayers,
-}
-
-export type Card = {
-  text: string
-  type: CardType
 }
