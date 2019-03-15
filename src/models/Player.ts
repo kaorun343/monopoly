@@ -1,4 +1,4 @@
-import { Either, Right, Left } from './utils/Either'
+import { Result, Ok, Err } from './utils/Result'
 
 export type Player = {
   readonly symbol: symbol
@@ -22,9 +22,9 @@ export function recieveMoney(player: Player, money: number): Player {
   return { ...player, money: player.money + money }
 }
 
-export function payMoney(player: Player, money: number): Either<Player, null> {
+export function payMoney(player: Player, money: number): Result<Player, null> {
   const result = player.money - money
-  return result >= 0 ? Right({ ...player, money: result }) : Left(null)
+  return result >= 0 ? Ok({ ...player, money: result }) : Err(null)
 }
 
 export function bankrupt(player: Player): Player {

@@ -1,5 +1,5 @@
 import { Player, recieveMoney, payMoney, bankrupt } from './Player'
-import { Right, Left } from './utils/Either'
+import { Ok, Err } from './utils/Result'
 
 const player = Player('', 1500)
 
@@ -16,13 +16,13 @@ describe('recieveMoney()', () => {
 
 describe('payMoney()', () => {
   it('should return Right when the player can pay', () => {
-    expect(payMoney(player, 1200)).toEqual(Right(updateSymbol(Player('', 300))))
-    expect(payMoney(player, 1500)).toEqual(Right(updateSymbol(Player('', 0))))
+    expect(payMoney(player, 1200)).toEqual(Ok(updateSymbol(Player('', 300))))
+    expect(payMoney(player, 1500)).toEqual(Ok(updateSymbol(Player('', 0))))
     expect(player.money).toBe(1500)
   })
 
   it('should return Left when the player cannot pay', () => {
-    expect(payMoney(player, 1501)).toEqual(Left(null))
+    expect(payMoney(player, 1501)).toEqual(Err(null))
   })
 })
 
