@@ -27,3 +27,12 @@ export function releasePrisoner<P>(jail: Jail<P>, prisoner: P): Jail<P> {
   newJail.delete(prisoner)
   return newJail
 }
+
+/**
+ * get the detention period
+ * @param jail the target jail object
+ * @param prisoner the target prisoner
+ */
+export function getDetentionPeriod<P>(jail: Jail<P>, prisoner: P): number {
+  return jail.get(prisoner)!
+}
