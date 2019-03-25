@@ -1,4 +1,4 @@
-export type Jail<P = Symbol> = ReadonlyMap<P, number>
+export type Jail<P = symbol> = ReadonlyMap<P, number>
 
 /**
  * init a jail object
