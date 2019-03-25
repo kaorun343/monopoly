@@ -1,5 +1,5 @@
 import { Player, recieveMoney, payMoney, bankrupt } from './Player'
-import { Ok, Err } from './utils/Result'
+import { Ok, Err } from '../utils/Result'
 
 const player = Player('', 1500)
 

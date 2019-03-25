@@ -1,4 +1,4 @@
-import { Result, Ok, Err } from './utils/Result'
+import { Result, Ok, Err } from '../utils/Result'
 
 export type Player = {
   readonly symbol: symbol
