@@ -1,3 +1,5 @@
+import { initMap, updateMap } from './utils/Map'
+
 export type Jail<P = symbol> = ReadonlyMap<P, number>
 
 /**
@@ -5,7 +7,7 @@ export type Jail<P = symbol> = ReadonlyMap<P, number>
  * @param prisoners the prisoners to be imprisoned
  */
 export function Jail<P>(...prisoners: P[]): Jail<P> {
-  return new Map(prisoners.map(prisoner => [prisoner, 0] as [P, number]))
+  return initMap(prisoners, 0)
 }
 
 /**
@@ -14,7 +16,7 @@ export function Jail<P>(...prisoners: P[]): Jail<P> {
  * @param prisoner to be imprisoned
  */
 export function imprisonPrisoner<P>(jail: Jail<P>, prisoner: P): Jail<P> {
-  return new Map(jail).set(prisoner, 0)
+  return updateMap(jail, prisoner, 0)
 }
 
 /**
