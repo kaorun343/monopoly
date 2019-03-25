@@ -1,16 +1,16 @@
 import { initMap, updateMap } from '../utils/Map'
 import { PlayerPosition } from './PlayerPosition'
 
-export type PositionList<P = symbol> = ReadonlyMap<P, PlayerPosition>
+export type PlayerPositionList<P = symbol> = ReadonlyMap<P, PlayerPosition>
 
-export function PositionList<P>(players: P[]): PositionList<P> {
+export function PositionList<P>(players: P[]): PlayerPositionList<P> {
   return initMap(players, PlayerPosition(0))
 }
 
 export function updatePosition<P>(
-  list: PositionList<P>,
+  list: PlayerPositionList<P>,
   player: P,
   position: PlayerPosition,
-): PositionList<P> {
+): PlayerPositionList<P> {
   return updateMap(list, player, position)
 }
