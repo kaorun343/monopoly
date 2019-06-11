@@ -7,7 +7,7 @@ export type Jail<P = symbol> = ReadonlyMap<P, number>
  * @param prisoners the prisoners to be imprisoned
  */
 export function Jail<P>(...prisoners: P[]): Jail<P> {
-  return initMap(prisoners, 0)
+  return initMap(prisoners, () => 0)
 }
 
 /**

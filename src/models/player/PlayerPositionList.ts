@@ -4,7 +4,7 @@ import { PlayerPosition } from './PlayerPosition'
 export type PlayerPositionList<P = symbol> = ReadonlyMap<P, PlayerPosition>
 
 export function PositionList<P>(players: P[]): PlayerPositionList<P> {
-  return initMap(players, PlayerPosition(0))
+  return initMap(players, () => PlayerPosition(0))
 }
 
 export function updatePosition<P>(

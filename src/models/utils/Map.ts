@@ -1,5 +1,8 @@
-export function initMap<T, U>(items: T[], defaultValue: U): ReadonlyMap<T, U> {
-  return new Map(items.map(item => [item, defaultValue] as [T, U]))
+export function initMap<T, U>(
+  items: T[],
+  initValue: () => U,
+): ReadonlyMap<T, U> {
+  return new Map(items.map(item => [item, initValue()] as [T, U]))
 }
 
 export function updateMap<T, U>(

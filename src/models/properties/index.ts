@@ -16,3 +16,8 @@ export type Property =
   | FreeParkingProperty
   | JailProperty
   | GoToJailProperty
+
+export type PurchasableProperty =
+  | StreetProperty
+  | UtilityProperty
+  | RailroadProperty
