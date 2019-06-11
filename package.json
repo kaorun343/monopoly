@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:unit": "jest --coverage src",
-    "test:unit:watch": "jest --watch"
+    "test": "jest --coverage src",
+    "test:watch": "jest --watch"
   },
   "jest": {
     "transform": {
