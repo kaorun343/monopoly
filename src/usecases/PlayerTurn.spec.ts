@@ -11,17 +11,14 @@ describe(PlayerTurnUsecase, () => {
       set: jest.fn(),
       count: jest.fn().mockReturnValueOnce(0),
     }
-    const boardRepository = {
-      walk: jest.fn(),
-      jump: jest.fn(),
-    }
+    const movePlayerUsecase = jest.fn()
     const goToJailUsecase = jest.fn()
 
     // Execute usecase
     const usecase = PlayerTurnUsecase(
       diceRepository,
       diceGenerator,
-      boardRepository,
+      movePlayerUsecase,
       goToJailUsecase,
     )
     const response = usecase(player)
@@ -33,7 +30,7 @@ describe(PlayerTurnUsecase, () => {
 
     test('player walks correct distance', async () => {
       await response
-      expect(boardRepository.walk).toHaveBeenCalledTimes(3)
+      expect(movePlayerUsecase).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -48,17 +45,14 @@ describe(PlayerTurnUsecase, () => {
         .mockReturnValueOnce(2)
         .mockReturnValueOnce(3),
     }
-    const boardRepository = {
-      walk: jest.fn(),
-      jump: jest.fn(),
-    }
+    const movePlayerUsecase = jest.fn()
     const goToJailUsecase = jest.fn()
 
     // Initialize dependencies
     const usecase = PlayerTurnUsecase(
       diceRepository,
       diceGenerator,
-      boardRepository,
+      movePlayerUsecase,
       goToJailUsecase,
     )
     const response = usecase(player)
@@ -70,7 +64,7 @@ describe(PlayerTurnUsecase, () => {
 
     test('player walks only 2 times', async () => {
       await response
-      expect(boardRepository.walk).toHaveBeenCalledTimes(4 * 2)
+      expect(movePlayerUsecase).toHaveBeenCalledTimes(2)
     })
 
     test('player go to jail', async () => {

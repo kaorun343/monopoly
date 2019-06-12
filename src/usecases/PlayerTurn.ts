@@ -2,7 +2,7 @@ import { Player } from '../models/player/Player'
 import { isDouble, toPrimitiveValue } from '../models/Dice'
 import { DiceGenerator } from '../interfaces/DiceGenerator'
 import { DiceRepository } from '../interfaces/DiceRepository'
-import { BoardRepository } from '../interfaces/BoardRepository'
+import { MovePlayerUsecase } from './MovePlayer'
 import { GoToJailUsecase } from './GoToJail'
 
 export type PlayerTurnUsecase = {
@@ -12,7 +12,7 @@ export type PlayerTurnUsecase = {
 export function PlayerTurnUsecase(
   diceRepository: DiceRepository,
   diceGenerator: DiceGenerator,
-  boardRepository: BoardRepository,
+  movePlayerUsecase: MovePlayerUsecase,
   goToJailUsecase: GoToJailUsecase,
 ): PlayerTurnUsecase {
   return async player => {
@@ -26,9 +26,7 @@ export function PlayerTurnUsecase(
     }
 
     // Move player
-    for (let i = 0, distance = toPrimitiveValue(dice); i < distance; i += 1) {
-      await boardRepository.walk(player)
-    }
+    await movePlayerUsecase(player, toPrimitiveValue(dice))
 
     // Do action
 
@@ -37,7 +35,7 @@ export function PlayerTurnUsecase(
       const useccase = PlayerTurnUsecase(
         diceRepository,
         diceGenerator,
-        boardRepository,
+        movePlayerUsecase,
         goToJailUsecase,
       )
       return useccase(player)
