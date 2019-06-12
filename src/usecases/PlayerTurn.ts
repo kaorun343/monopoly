@@ -32,13 +32,13 @@ export function PlayerTurnUsecase(
 
     // Check if the player can dice more one time or not
     if (isDouble(dice)) {
-      const useccase = PlayerTurnUsecase(
+      const usecase = PlayerTurnUsecase(
         diceRepository,
         diceGenerator,
         movePlayerUsecase,
         goToJailUsecase,
       )
-      return useccase(player)
+      return usecase(player)
     } else {
       return
     }
