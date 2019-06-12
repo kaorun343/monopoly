@@ -13,13 +13,16 @@ describe(PlayerTurnUsecase, () => {
     }
     const boardRepository = {
       walk: jest.fn(),
+      jump: jest.fn(),
     }
+    const goToJailUsecase = jest.fn()
 
     // Execute usecase
     const usecase = PlayerTurnUsecase(
       diceRepository,
       diceGenerator,
       boardRepository,
+      goToJailUsecase,
     )
     const response = usecase(player)
 
@@ -47,13 +50,16 @@ describe(PlayerTurnUsecase, () => {
     }
     const boardRepository = {
       walk: jest.fn(),
+      jump: jest.fn(),
     }
+    const goToJailUsecase = jest.fn()
 
     // Initialize dependencies
     const usecase = PlayerTurnUsecase(
       diceRepository,
       diceGenerator,
       boardRepository,
+      goToJailUsecase,
     )
     const response = usecase(player)
 
@@ -65,6 +71,11 @@ describe(PlayerTurnUsecase, () => {
     test('player walks only 2 times', async () => {
       await response
       expect(boardRepository.walk).toHaveBeenCalledTimes(4 * 2)
+    })
+
+    test('player go to jail', async () => {
+      await response
+      expect(goToJailUsecase).toHaveBeenCalledTimes(1)
     })
   })
 })

@@ -3,6 +3,7 @@ import { isDouble, toPrimitiveValue } from '../models/Dice'
 import { DiceGenerator } from '../interfaces/DiceGenerator'
 import { DiceRepository } from '../interfaces/DiceRepository'
 import { BoardRepository } from '../interfaces/BoardRepository'
+import { GoToJailUsecase } from './GoToJail'
 
 export type PlayerTurnUsecase = {
   (player: Player): Promise<any>
@@ -12,6 +13,7 @@ export function PlayerTurnUsecase(
   diceRepository: DiceRepository,
   diceGenerator: DiceGenerator,
   boardRepository: BoardRepository,
+  goToJailUsecase: GoToJailUsecase,
 ): PlayerTurnUsecase {
   return async player => {
     const dice = diceGenerator()
@@ -20,7 +22,7 @@ export function PlayerTurnUsecase(
     // Check if the player must go to jail or not
     if (diceRepository.count(player) === 3) {
       // Go To Jail
-      return
+      return goToJailUsecase(player)
     }
 
     // Move player
@@ -36,6 +38,7 @@ export function PlayerTurnUsecase(
         diceRepository,
         diceGenerator,
         boardRepository,
+        goToJailUsecase,
       )
       return useccase(player)
     } else {
