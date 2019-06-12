@@ -1,17 +1,19 @@
 import { Player } from '../models/player/Player'
-import { isDouble } from '../models/Dice'
+import { isDouble, toPrimitiveValue } from '../models/Dice'
 import { DiceGenerator } from '../interfaces/DiceGenerator'
 import { DiceRepository } from '../interfaces/DiceRepository'
+import { BoardRepository } from '../interfaces/BoardRepository'
 
 export type PlayerTurnUsecase = {
-  (player: Player): any
+  (player: Player): Promise<any>
 }
 
 export function PlayerTurnUsecase(
   diceRepository: DiceRepository,
   diceGenerator: DiceGenerator,
+  boardRepository: BoardRepository,
 ): PlayerTurnUsecase {
-  return player => {
+  return async player => {
     const dice = diceGenerator()
     diceRepository.set(player, dice)
 
@@ -22,12 +24,20 @@ export function PlayerTurnUsecase(
     }
 
     // Move player
+    for (let i = 0, distance = toPrimitiveValue(dice); i < distance; i += 1) {
+      await boardRepository.walk(player)
+    }
 
     // Do action
 
     // Check if the player can dice more one time or not
     if (isDouble(dice)) {
-      return PlayerTurnUsecase(diceRepository, diceGenerator)(player)
+      const useccase = PlayerTurnUsecase(
+        diceRepository,
+        diceGenerator,
+        boardRepository,
+      )
+      return useccase(player)
     } else {
       return
     }

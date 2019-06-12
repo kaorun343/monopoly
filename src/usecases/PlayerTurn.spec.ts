@@ -5,21 +5,37 @@ describe(PlayerTurnUsecase, () => {
   const player = Player('', 1500)
 
   describe('when dice is not double', () => {
+    // Initialize dependencies
     const diceGenerator = jest.fn().mockReturnValue([1, 2])
     const diceRepository = {
       set: jest.fn(),
       count: jest.fn().mockReturnValueOnce(0),
     }
+    const boardRepository = {
+      walk: jest.fn(),
+    }
 
-    const usecase = PlayerTurnUsecase(diceRepository, diceGenerator)
-    usecase(player)
+    // Execute usecase
+    const usecase = PlayerTurnUsecase(
+      diceRepository,
+      diceGenerator,
+      boardRepository,
+    )
+    const response = usecase(player)
 
-    test('dice is called once', () => {
+    test('dice is called once', async () => {
+      await response
       expect(diceGenerator).toHaveBeenCalledTimes(1)
+    })
+
+    test('player walks correct distance', async () => {
+      await response
+      expect(boardRepository.walk).toHaveBeenCalledTimes(3)
     })
   })
 
   describe('when dice is double', () => {
+    // Initialize dependencies
     const diceGenerator = jest.fn().mockReturnValue([2, 2])
     const diceRepository = {
       set: jest.fn(),
@@ -29,12 +45,26 @@ describe(PlayerTurnUsecase, () => {
         .mockReturnValueOnce(2)
         .mockReturnValueOnce(3),
     }
+    const boardRepository = {
+      walk: jest.fn(),
+    }
 
-    const usecase = PlayerTurnUsecase(diceRepository, diceGenerator)
-    usecase(player)
+    // Initialize dependencies
+    const usecase = PlayerTurnUsecase(
+      diceRepository,
+      diceGenerator,
+      boardRepository,
+    )
+    const response = usecase(player)
 
-    test('dice is called 3 times', () => {
+    test('dice is called 3 times', async () => {
+      await response
       expect(diceGenerator).toHaveBeenCalledTimes(3)
+    })
+
+    test('player walks only 2 times', async () => {
+      await response
+      expect(boardRepository.walk).toHaveBeenCalledTimes(4 * 2)
     })
   })
 })
