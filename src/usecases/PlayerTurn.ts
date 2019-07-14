@@ -4,6 +4,7 @@ import { DiceGenerator } from '../interfaces/DiceGenerator'
 import { DiceRepository } from '../interfaces/DiceRepository'
 import { MovePlayerUsecase } from './MovePlayer'
 import { GoToJailUsecase } from './GoToJail'
+import { DoActionUsecase } from './DoAction'
 
 export type PlayerTurnUsecase = {
   (player: Player, usecase: PlayerTurnUsecase): Promise<any>
@@ -14,6 +15,7 @@ export function PlayerTurnUsecase(
   diceGenerator: DiceGenerator,
   movePlayerUsecase: MovePlayerUsecase,
   goToJailUsecase: GoToJailUsecase,
+  doActionUsecase: DoActionUsecase,
 ): PlayerTurnUsecase {
   return async (player, usecase) => {
     const dice = diceGenerator()
@@ -33,6 +35,7 @@ export function PlayerTurnUsecase(
     await movePlayerUsecase(player, toPrimitiveValue(dice))
 
     // Do action
+    await doActionUsecase(player, dice)
 
     // Check if the player can dice more one time or not
     if (isDouble(dice)) {
