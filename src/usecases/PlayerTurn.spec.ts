@@ -21,7 +21,7 @@ describe(PlayerTurnUsecase, () => {
       movePlayerUsecase,
       goToJailUsecase,
     )
-    const response = usecase(player)
+    const response = usecase(player, usecase)
 
     test('dice is called once', async () => {
       await response
@@ -55,7 +55,7 @@ describe(PlayerTurnUsecase, () => {
       movePlayerUsecase,
       goToJailUsecase,
     )
-    const response = usecase(player)
+    const response = usecase(player, usecase)
 
     test('dice is called 3 times', async () => {
       await response

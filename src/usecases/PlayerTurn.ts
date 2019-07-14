@@ -6,7 +6,7 @@ import { MovePlayerUsecase } from './MovePlayer'
 import { GoToJailUsecase } from './GoToJail'
 
 export type PlayerTurnUsecase = {
-  (player: Player): Promise<any>
+  (player: Player, usecase: PlayerTurnUsecase): Promise<any>
 }
 
 export function PlayerTurnUsecase(
@@ -15,7 +15,7 @@ export function PlayerTurnUsecase(
   movePlayerUsecase: MovePlayerUsecase,
   goToJailUsecase: GoToJailUsecase,
 ): PlayerTurnUsecase {
-  return async player => {
+  return async (player, usecase) => {
     const dice = diceGenerator()
     diceRepository.set(player, dice)
 
@@ -32,13 +32,7 @@ export function PlayerTurnUsecase(
 
     // Check if the player can dice more one time or not
     if (isDouble(dice)) {
-      const usecase = PlayerTurnUsecase(
-        diceRepository,
-        diceGenerator,
-        movePlayerUsecase,
-        goToJailUsecase,
-      )
-      return usecase(player)
+      return usecase(player, usecase)
     } else {
       return
     }
