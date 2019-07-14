@@ -1,12 +1,9 @@
 import { MovePlayerUsecase } from './MovePlayer'
 import { Player } from '../models/player/Player'
+import { BoardRepositoryMock } from '../__mocks__/BoardRepository'
 
 describe(MovePlayerUsecase, () => {
-  const boardRepository = {
-    walk: jest.fn(),
-    jump: jest.fn(),
-  }
-
+  const boardRepository = new BoardRepositoryMock()
   const usecase = MovePlayerUsecase(boardRepository)
 
   const player = Player('', 1500)

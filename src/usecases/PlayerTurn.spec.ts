@@ -1,5 +1,6 @@
 import { PlayerTurnUsecase } from './PlayerTurn'
 import { Player } from '../models/player/Player'
+import { DiceRepositoryMock } from '../__mocks__/DiceRepository'
 
 describe(PlayerTurnUsecase, () => {
   const player = Player('', 1500)
@@ -7,10 +8,8 @@ describe(PlayerTurnUsecase, () => {
   describe('when dice is not double', () => {
     // Initialize dependencies
     const diceGenerator = jest.fn().mockReturnValue([1, 2])
-    const diceRepository = {
-      set: jest.fn(),
-      count: jest.fn().mockReturnValueOnce(0),
-    }
+    const diceRepository = new DiceRepositoryMock()
+    diceRepository.count.mockReturnValueOnce(0)
     const movePlayerUsecase = jest.fn()
     const goToJailUsecase = jest.fn()
 
@@ -37,14 +36,11 @@ describe(PlayerTurnUsecase, () => {
   describe('when dice is double', () => {
     // Initialize dependencies
     const diceGenerator = jest.fn().mockReturnValue([2, 2])
-    const diceRepository = {
-      set: jest.fn(),
-      count: jest
-        .fn()
-        .mockReturnValueOnce(1)
-        .mockReturnValueOnce(2)
-        .mockReturnValueOnce(3),
-    }
+    const diceRepository = new DiceRepositoryMock()
+    diceRepository.count
+      .mockReturnValueOnce(1)
+      .mockReturnValueOnce(2)
+      .mockReturnValueOnce(3)
     const movePlayerUsecase = jest.fn()
     const goToJailUsecase = jest.fn()
 

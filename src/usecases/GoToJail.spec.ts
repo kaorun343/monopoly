@@ -1,15 +1,12 @@
 import { GoToJailUsecase } from './GoToJail'
 import { Player } from '../models/player/Player'
+import { BoardRepositoryMock } from '../__mocks__/BoardRepository'
+import { PlayerRepositoryMock } from '../__mocks__/PlayerRepository'
 
 describe(GoToJailUsecase, () => {
   // Initialize dependencies
-  const playerRepository = {
-    goToJail: jest.fn(),
-  }
-  const boardRepository = {
-    walk: jest.fn(),
-    jump: jest.fn(),
-  }
+  const playerRepository = new PlayerRepositoryMock()
+  const boardRepository = new BoardRepositoryMock()
   const jailPosition = 30
   const player = Player('', 1500)
 
