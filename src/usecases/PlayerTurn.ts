@@ -18,11 +18,10 @@ export function PlayerTurnUsecase(
   doActionUsecase: DoActionUsecase,
 ): PlayerTurnUsecase {
   return async (player, usecase) => {
-    const dice = diceGenerator()
-
     // If player is in jail
 
     // dice
+    const dice = diceGenerator()
     diceRepository.set(player, dice)
 
     // Check if the player must go to jail or not
